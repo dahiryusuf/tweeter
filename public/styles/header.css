@@ -1,0 +1,17 @@
+header {
+  height: 400px;
+  width: 100%;
+  background-color:#0059b8;
+  background-image: url("https://www.transparenttextures.com/patterns/bright-squares.png");
+}
+
+#pic {
+  display: flex;
+  justify-content: center;
+  margin-top: 120px;
+}
+#name {
+  display: flex;
+  color:seashell;
+  justify-content: center;
+}
