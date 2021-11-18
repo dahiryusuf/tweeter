@@ -4,31 +4,7 @@
  * Reminder: Use (and do all your DOM work in) jQuery's document ready function
  */
 $(document).ready(function() {
-  const data = [
-    {
-      "user": {
-        "name": "Newton",
-        "avatars": "https://i.imgur.com/73hZDYK.png"
-        ,
-        "handle": "@SirIsaac"
-      },
-      "content": {
-        "text": "If I have seen further it is by standing on the shoulders of giants"
-      },
-      "created_at": 1461116232227
-    },
-    {
-      "user": {
-        "name": "Descartes",
-        "avatars": "https://i.imgur.com/nlhLi3I.png",
-        "handle": "@rd" },
-      "content": {
-        "text": "Je pense , donc je suis"
-      },
-      "created_at": 1461113959088
-    }
-  ]
-
+  
   const renderTweets = function(tweets) {
    let $tweets = {}; 
     for(let i of tweets){
@@ -55,6 +31,29 @@ const createTweetElement = (Data) => {
   </article>`);
   return $tweet;
 }
-
-renderTweets(data);
+const loadTweets = (check) => {
+  $.ajax('/tweets', { method: 'GET' })
+  .then(function (data) {
+    const len = data.length - 1;
+    if(check){
+      createTweetElement(data[len]);
+    }
+    renderTweets(data)
+  });
+  
+}
+$("form").on("submit", function (event) {
+  event.preventDefault();
+  const $input = document.getElementById("tweet-text");
+  if($( this ).serialize().length === 5){
+    return alert("Tweet can not be empty")
+  }
+  if($( this ).serialize().length > 145){
+    return alert("Tweet is to large")
+  }
+  $.post( "/tweets", $( this ).serialize() );
+  $input.value = "";
+  loadTweets(1)
+  });
+  loadTweets();
 });
