@@ -14,8 +14,8 @@ html {
  * Global layout stuff
  */
 .container {
+  margin: 20px;
   display: flex;
-  width: 90%;
   flex-direction: column;
   justify-content: center;
   background-color: #f4f1ec;
