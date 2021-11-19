@@ -14,7 +14,11 @@ border-width: 5px;
   justify-content: space-between;
   align-items: baseline;
 }
-
+#error{
+  border-style: solid;
+  border-color: red;
+  color: red;
+}
 button {
   background-color: royalblue;
   color: seashell;

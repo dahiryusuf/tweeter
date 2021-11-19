@@ -13,7 +13,11 @@ $(document).ready(function() {
     }
     
   }
-  
+  const escape = function (str) {
+    let div = document.createElement("div");
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  };
 const createTweetElement = (Data) => {
   const $tweet = $( `<article class = "tweet"> 
   <header>
@@ -31,29 +35,40 @@ const createTweetElement = (Data) => {
   </article>`);
   return $tweet;
 }
-const loadTweets = (check) => {
+const loadTweets = () => {
   $.ajax('/tweets', { method: 'GET' })
   .then(function (data) {
-    const len = data.length - 1;
-    if(check){
-      createTweetElement(data[len]);
-    }
-    renderTweets(data)
+    renderTweets(data);
   });
+}
+  const loadNewTweets = () => {
+    $.ajax('/tweets', { method: 'GET' })
+    .then(function (data) {
+      let len = data.length - 1;
+      let k = createTweetElement(data[len]);
+       $('#tweets-container').append(k);
+   
+    });
   
 }
 $("form").on("submit", function (event) {
   event.preventDefault();
   const $input = document.getElementById("tweet-text");
   if($( this ).serialize().length === 5){
-    return alert("Tweet can not be empty")
+    $("#error").html("⚠️ Your tweet can't be empty tell us whats on your mind! ⚠️");
+    $("#error").hide();
+   return $("#error").slideDown("slow");
   }
   if($( this ).serialize().length > 145){
-    return alert("Tweet is to large")
+    $("#error").html("⚠️ Sorry your tweet is above our limit ⚠️");
+    $("#error").hide();
+    return $("#error").slideDown("slow");
+   
   }
+  $("#error").slideUp("slow");
   $.post( "/tweets", $( this ).serialize() );
-  $input.value = "";
-  loadTweets(1)
+  // $input.value = "";
+  loadNewTweets()
   });
   loadTweets();
 });
