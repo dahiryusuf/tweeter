@@ -7,7 +7,7 @@ $(document).ready(function() {
   
   const renderTweets = function(tweets) {
    let $tweets = {}; 
-    for(let i of tweets){
+    for(let i of tweets.reverse()){
      $tweets =  createTweetElement(i)
       $('#tweets-container').append($tweets);
     }
@@ -42,18 +42,19 @@ const loadTweets = () => {
   });
 }
   const loadNewTweets = () => {
+    let len = 0;
     $.ajax('/tweets', { method: 'GET' })
     .then(function (data) {
-      let len = data.length - 1;
-      let k = createTweetElement(data[len]);
-       $('#tweets-container').append(k);
-   
+      len = data.length - 1;
+     let ntweet = createTweetElement(data[len]);
+      $('#tweets-container').prepend(ntweet);
     });
   
 }
 $("form").on("submit", function (event) {
   event.preventDefault();
   const $input = document.getElementById("tweet-text");
+  const $counter = document.getElementById("counter");
   if($( this ).serialize().length === 5){
     $("#error").html("⚠️ Your tweet can't be empty tell us whats on your mind! ⚠️");
     $("#error").hide();
@@ -63,12 +64,19 @@ $("form").on("submit", function (event) {
     $("#error").html("⚠️ Sorry your tweet is above our limit ⚠️");
     $("#error").hide();
     return $("#error").slideDown("slow");
-   
   }
   $("#error").slideUp("slow");
-  $.post( "/tweets", $( this ).serialize() );
-  // $input.value = "";
-  loadNewTweets()
+  $.post( "/tweets", $( this ).serialize() )
+  .then(function(){
+    loadNewTweets();
+  })
+  $input.value = "";
+  $counter.innerHTML = 140;
   });
+
+  $("#newTweet").on("click", function (event) {
+    const $input = document.getElementById("tweet-text");
+    $input.focus();
+    });
   loadTweets();
 });

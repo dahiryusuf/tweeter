@@ -38,9 +38,7 @@ article.tweet hr {
 
 article.tweet div{ 
   display: flex;
-  flex-wrap: nowrap;
   justify-content: space-between;
-  align-items: flex-start;
   font-size: 20px;
 }
 

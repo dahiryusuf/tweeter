@@ -8,10 +8,24 @@
 #pic {
   display: flex;
   justify-content: center;
-  margin-top: 120px;
+  margin-top: 90px;
 }
 #name {
   display: flex;
   color:seashell;
   justify-content: center;
+}
+@media only screen and (min-width: 1024px) {
+  #top {
+  height: 350px;  
+  margin-top: 200px;
+  margin-left: 50px;
+  width: 30%;
+  }
+ #pic {
+  margin-top: 15px;
+ }
+ #name {
+  margin-top: 0px;
+ }
 }

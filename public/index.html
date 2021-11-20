@@ -30,8 +30,10 @@
   <body>
     <!-- Top nav bar (fixed) -->
     <nav>
+      <div id = "both">
       <span id="logo">tweeter</span>
-      <span id="newTweet"><b>Write</b>&nbsp;a new tweet</span>
+      <h4 id="newTweet"><b>Write</b>&nbsp;a new tweet</h4>
+    </div>
       <i class="fas fa-angle-double-down"></i>
     </nav>
     <header id = "top">
@@ -39,15 +41,14 @@
           <img src="/images/profile-hex.png"> 
       </div>
       <br>
-      <div id = "name">
-          <h2>Dahir Yusuf</h2>
+      <div>
+          <h2 id = "name">Dahir Yusuf</h2>
       </div>
   </header>
     <!-- Page-specific (main) content here -->
     <main class="container">
       <section class="new-tweet">
        <h4 id = "error" style= "display:none"></h4>
-        <h2>Compose Tweet</h2>
         <form action="/tweets/" method="POST">
           <label for="tweet-text">What are you humming about?</label>
           <textarea name="text" id="tweet-text"></textarea>
