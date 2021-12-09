@@ -67,6 +67,7 @@ $(document).ready(function() {
       });
     $input.value = "";
     $counter.innerHTML = 140;
+    $counter.style.color = "black";
   });
 
   $("#newTweet").on("click", function() {
