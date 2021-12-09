@@ -56,6 +56,7 @@ $(document).ready(function() {
       return $("#error").slideDown("slow");
     }
     if ($(this).serialize().length > 145) {
+      
       $("#error").html("⚠️ Sorry your tweet is above our limit ⚠️");
       $("#error").hide();
       return $("#error").slideDown("slow");

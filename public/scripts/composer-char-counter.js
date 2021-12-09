@@ -5,7 +5,7 @@ $(document).ready(function() {
 
   $input.on('keypress', function(event) {
     console.log($(this).val().length);
-  if (index < 0) {
+  if (index <= 0) {
       index--;
       $counter.style.color = "red";
       $counter.innerHTML = index;
@@ -19,7 +19,6 @@ $(document).ready(function() {
   $("form").on("submit", function(event) {
     if ($(this).val().length <= 139) {
     index = 140;
-    $counter.style.color = "black";
     }
   });
 });
