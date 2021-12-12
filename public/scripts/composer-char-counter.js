@@ -3,22 +3,27 @@ $(document).ready(function() {
   const $counter = document.getElementById("counter");
   let index = 140;
 
-  $input.on('keypress', function(event) {
-    console.log($(this).val().length);
-  if (index <= 0) {
-      index--;
+  $input.on('keyup', function(event) {
+    index = 140 - $(this).val().length;
+
+  if (event.key === "Backspace") {
+     index + 1;
+    }
+
+  if ($(this).val().length > 140) {
       $counter.style.color = "red";
       $counter.innerHTML = index;
     }
    else {
-    index--;
+    $counter.style.color = "black";
     $counter.innerHTML = index;
     }
   });
 
   $("form").on("submit", function(event) {
-    if ($(this).val().length <= 139) {
-    index = 140;
+    if ($(this).val().length > 139) {
+    $counter.style.color = "red";
     }
+    index = 140;
   });
 });
