@@ -50,12 +50,13 @@ $(document).ready(function() {
     event.preventDefault();
     const $input = document.getElementById("tweet-text");
     const $counter = document.getElementById("counter");
-    if ($(this).serialize().length === 5) {
+    
+    if ($("#tweet-text").val().length <= 0) {
       $("#error").html("⚠️ Your tweet can't be empty tell us whats on your mind! ⚠️");
       $("#error").hide();
       return $("#error").slideDown("slow");
     }
-    if ($(this).serialize().length > 145) {
+    if ($("#tweet-text").val().length > 140) {
       
       $("#error").html("⚠️ Sorry your tweet is above our limit ⚠️");
       $("#error").hide();
